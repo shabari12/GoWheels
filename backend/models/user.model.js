@@ -5,26 +5,27 @@ const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema({
   fullname: {
-    type: String,
-    required: true,
-    minlength: [3, "First name must be at least 3 letters"],
-  },
-  lastname: {
-    type: String,
-    minlength: [3, "Last name must be at least 3 letters"],
+    firstname: {
+      type: String,
+      required: true,
+      minlength: [3, "First name must be at least 3 characters"],
+    },
+    lastname: {
+      type: String,
+      required: true,
+      minlength: [3, "Last name must be at least 3 characters"],
+    },
   },
   email: {
     type: String,
     required: true,
-    minlength: [5, "Email must be at least 3 letters"],
+    unique: true,
+    minlength: [5, "Email must be at least 5 characters"],
   },
   password: {
     type: String,
     required: true,
     select: false,
-  },
-  socketId: {
-    type: String,
   },
 });
 
@@ -40,4 +41,4 @@ userSchema.statics.hashPassword = async (password) => {
 };
 
 const userModel = mongoose.model("user", userSchema);
-model.exports = userModel;
+module.exports = userModel;

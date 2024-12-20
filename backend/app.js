@@ -1,5 +1,6 @@
 const dotenv = require("dotenv");
 dotenv.config();
+const bodyParser = require("body-parser");
 const express = require("express");
 const cors = require("cors");
 const connectTob = require("./db/db");
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, ress) => {
   ress.send("Hello World");
 });
+app.use(bodyParser.json());
 app.use("/users", userRoutes);
 
 module.exports = app;
