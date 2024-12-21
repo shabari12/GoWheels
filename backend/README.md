@@ -73,3 +73,67 @@ The request body should be a JSON object with the following fields:
   "message": "Error message here"
 }
 ```
+
+# User Login Endpoint
+
+## Endpoint: `/users/login`
+
+### Method: POST
+
+### Description:
+
+This endpoint is used to log in an existing user. It validates the input data and returns a JWT token if the credentials are valid.
+
+### Request Body:
+
+The request body should be a JSON object with the following fields:
+
+- `email`: A valid email address.
+- `password`: A string with a minimum length of 6 characters.
+
+### Example Request Body:
+
+```json
+{
+  "email": "john.doe@example.com",
+  "password": "password123"
+}
+```
+
+### Example Response Body Success:
+
+```json
+{
+  "token": "jwt_token_here",
+  "user": {
+    "_id": "user_id_here",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john.doe@example.com"
+  }
+}
+```
+
+### Example Error Response Body Error:
+
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid email or password",
+      "param": "email",
+      "location": "body"
+    }
+  ]
+}
+```
+
+### Example General Error Response Body:
+
+```json
+{
+  "message": "Error message here"
+}
+```
