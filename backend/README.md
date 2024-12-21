@@ -218,3 +218,97 @@ Authorization: Bearer jwt_token_here
   "message": "Unauthorized"
 }
 ```
+
+# Captain Registration Endpoint
+
+## Endpoint: `/captains/register`
+
+### Method: POST
+
+### Description:
+
+This endpoint is used to register a new captain. It validates the input data and creates a new captain in the database if the data is valid.
+
+### Request Body:
+
+The request body should be a JSON object with the following fields:
+
+- `fullname`: An object containing:
+  - `firstname`: A string with a minimum length of 3 characters.
+  - `lastname`: A string with a minimum length of 3 characters.
+- `email`: A valid email address.
+- `password`: A string with a minimum length of 6 characters.
+- `vehicle`: An object containing:
+  - `color`: A string with a minimum length of 3 characters.
+  - `plate`: A string with a minimum length of 3 characters.
+  - `capacity`: A number with a minimum value of 1.
+  - `vehicleType`: A string that must be one of the following: "car", "motorcycle", "auto".
+
+### Example Request Body:
+
+```json
+{
+  "fullname": {
+    "firstname": "John",
+    "lastname": "Doe"
+  },
+  "email": "john.doe@example.com",
+  "password": "password123",
+  "vehicle": {
+    "color": "Red",
+    "plate": "ABC123",
+    "capacity": 4,
+    "vehicleType": "car"
+  }
+}
+```
+
+### Example Response Body Success:
+
+```json
+{
+  "token": "jwt_token_here",
+  "captain": {
+    "_id": "captain_id_here",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john.doe@example.com",
+    "vehicle": {
+      "color": "Red",
+      "plate": "ABC123",
+      "capacity": 4,
+      "vehicleType": "car"
+    },
+    "status": "inactive"
+  }
+}
+```
+
+### Example Error Response Body:
+
+```json
+{
+  "errors": [
+    {
+      "msg": "First name must be at least 3 characters",
+      "param": "fullname.firstname",
+      "location": "body"
+    },
+    {
+      "msg": "Invalid Email",
+      "param": "email",
+      "location": "body"
+    }
+  ]
+}
+```
+
+### Example General Error Response Body:
+
+```json
+{
+  "message": "Error message here"
+}
+```
