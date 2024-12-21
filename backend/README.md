@@ -219,47 +219,29 @@ Authorization: Bearer jwt_token_here
 }
 ```
 
-# Captain Registration Endpoint
+# Captain Login Endpoint
 
-## Endpoint: `/captains/register`
+## Endpoint: `/captains/login`
 
 ### Method: POST
 
 ### Description:
 
-This endpoint is used to register a new captain. It validates the input data and creates a new captain in the database if the data is valid.
+This endpoint is used to log in an existing captain. It validates the input data and returns a JWT token if the credentials are valid.
 
 ### Request Body:
 
 The request body should be a JSON object with the following fields:
 
-- `fullname`: An object containing:
-  - `firstname`: A string with a minimum length of 3 characters.
-  - `lastname`: A string with a minimum length of 3 characters.
 - `email`: A valid email address.
 - `password`: A string with a minimum length of 6 characters.
-- `vehicle`: An object containing:
-  - `color`: A string with a minimum length of 3 characters.
-  - `plate`: A string with a minimum length of 3 characters.
-  - `capacity`: A number with a minimum value of 1.
-  - `vehicleType`: A string that must be one of the following: "car", "motorcycle", "auto".
 
 ### Example Request Body:
 
 ```json
 {
-  "fullname": {
-    "firstname": "John",
-    "lastname": "Doe"
-  },
-  "email": "john.doe@example.com",
-  "password": "password123",
-  "vehicle": {
-    "color": "Red",
-    "plate": "ABC123",
-    "capacity": 4,
-    "vehicleType": "car"
-  }
+  "email": "captain@example.com",
+  "password": "password123"
 }
 ```
 
@@ -274,41 +256,123 @@ The request body should be a JSON object with the following fields:
       "firstname": "John",
       "lastname": "Doe"
     },
-    "email": "john.doe@example.com",
+    "email": "captain@example.com",
     "vehicle": {
-      "color": "Red",
+      "color": "red",
       "plate": "ABC123",
       "capacity": 4,
       "vehicleType": "car"
-    },
-    "status": "inactive"
+    }
   }
 }
 ```
 
-### Example Error Response Body:
+### Example Error Response Body Error:
 
-```json
+````json
 {
   "errors": [
     {
-      "msg": "First name must be at least 3 characters",
-      "param": "fullname.firstname",
-      "location": "body"
-    },
-    {
-      "msg": "Invalid Email",
+      "msg": "Invalid email or password",
       "param": "email",
       "location": "body"
     }
   ]
 }
-```
 
 ### Example General Error Response Body:
 
 ```json
 {
   "message": "Error message here"
+}
+````
+
+# Captain Profile Endpoint
+
+## Endpoint: `/captains/profile`
+
+### Method: POST
+
+### Description:
+
+This endpoint is used to retrieve the profile of the authenticated captain. It requires a valid JWT token to be provided in the request headers or cookies.
+
+### Headers:
+
+- `Authorization`: Bearer token (if not using cookies)
+
+### Example Request:
+
+```http
+POST /captains/profile HTTP/1.1
+Host: yourapi.com
+Authorization: Bearer jwt_token_here
+```
+
+### Example Response Body Success:
+
+```json
+{
+  "captain": {
+    "_id": "captain_id_here",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "captain@example.com",
+    "vehicle": {
+      "color": "red",
+      "plate": "ABC123",
+      "capacity": 4,
+      "vehicleType": "car"
+    }
+  }
+}
+```
+
+### Example Unauthorized Response Body:
+
+```json
+{
+  "message": "Unauthorized"
+}
+```
+
+# Captain Logout Endpoint
+
+## Endpoint: `/captains/logout`
+
+### Method: POST
+
+### Description:
+
+This endpoint is used to log out the authenticated captain. It requires a valid JWT token to be provided in the request headers or cookies.
+
+### Headers:
+
+- `Authorization`: Bearer token (if not using cookies)
+
+### Example Request:
+
+```http
+POST /captains/logout HTTP/1.1
+Host: yourapi.com
+Authorization: Bearer jwt_token_here
+```
+
+### Example Response Body Success:
+
+```json
+{
+  "message": "logout Sucessfull"
+}
+```
+
+### Example Unauthorized Response Body:
+
+```json
+{
+  "message": "Unauthorized"
 }
 ```
