@@ -137,3 +137,84 @@ The request body should be a JSON object with the following fields:
   "message": "Error message here"
 }
 ```
+
+# User Profile Endpoint
+
+## Endpoint: `/users/profile`
+
+### Method: GET
+
+### Description:
+
+This endpoint is used to retrieve the profile of the authenticated user. It requires a valid JWT token to be provided in the request headers or cookies.
+
+### Headers:
+
+- `Authorization`: Bearer token (if not using cookies)
+
+### Example Request:
+
+```http
+GET /users/profile HTTP/1.1
+Host: yourapi.com
+Authorization: Bearer jwt_token_here
+```
+
+### Example Response Body Success:
+
+```json
+{
+  "_id": "user_id_here",
+  "fullname": {
+    "firstname": "John",
+    "lastname": "Doe"
+  },
+  "email": "john.doe@example.com"
+}
+```
+
+### Example Unauthorized Response Body:
+
+```json
+{
+  "message": "Unauthorized"
+}
+```
+
+# User Logout Endpoint
+
+## Endpoint: `/users/logout`
+
+### Method: GET
+
+### Description:
+
+This endpoint is used to log out the authenticated user. It requires a valid JWT token to be provided in the request headers or cookies.
+
+### Headers:
+
+- `Authorization`: Bearer token (if not using cookies)
+
+### Example Request:
+
+```http
+GET /users/logout HTTP/1.1
+Host: yourapi.com
+Authorization: Bearer jwt_token_here
+```
+
+### Example Response Body Success:
+
+```json
+{
+  "message": "Successfully logged out"
+}
+```
+
+### Example Unauthorized Response Body:
+
+```json
+{
+  "message": "Unauthorized"
+}
+```
