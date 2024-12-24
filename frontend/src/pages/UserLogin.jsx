@@ -11,7 +11,7 @@ const UserLogin = () => {
       email: email,
       password: password,
     });
-    
+
     setemail("");
     setpassword("");
   };
@@ -19,7 +19,7 @@ const UserLogin = () => {
     <div className="p-7 h-screen flex flex-col justify-between">
       <div>
         <img
-          className="w-16 mb-10 z-"
+          className="w-14 mb-10 z-"
           src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
           alt="Uber Logo"
         />
@@ -61,7 +61,7 @@ const UserLogin = () => {
       <div>
         <Link
           to="/captain-login"
-          className="bg-[#10b461] flex items-center justify-center mb-5 text-white rounded px-4 py-2  w-full text-lg placeholder:text-base"
+          className="bg-[#111] flex items-center justify-center mb-5 text-white rounded px-4 py-2  w-full text-lg placeholder:text-base"
         >
           Sign in as Captain
         </Link>
