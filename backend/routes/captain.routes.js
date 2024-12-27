@@ -42,12 +42,12 @@ router.post(
   ],
   captainController.loginCaptain
 );
-router.post(
+router.get(
   "/profile",
   authMiddleware.authCaptain,
   captainController.getCaptainProfile
 );
-router.post(
+router.get(
   "/logout",
   authMiddleware.authCaptain,
   captainController.logoutCaptain
