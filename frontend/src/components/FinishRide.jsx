@@ -1,25 +1,28 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const WaitingForDriver = (props) => {
+const FinishRide = (props) => {
   return (
     <div>
       <h5
         onClick={() => {
-          props.waitingForDriver(false);
+          props.setConfirmridePopupPannel(false);
         }}
         className="p-1 text-center w-[93%] absolute top-0 "
-      ></h5>
-      <div className="flex items-center justify-between">
-        <img
-          className="h-12"
-          src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_368,w_552/v1652995234/assets/92/8d4288-e896-4333-9bc2-c60c49f2a095/original/UberXL_Black_v2.png"
-          alt=""
-        />
-        <div className="text-right">
-          <h2 className="text-lg font-medium">Shabari</h2>
-          <h4 className="text-xl font-semibold -mt 1 -mb-1">TN 67 BS 0321</h4>
-          <p className="text-sm text-gray-600">Swift Dzire</p>
+      >
+        <i className="text-3xl text-gray-200 ri-arrow-down-wide-line"></i>
+      </h5>
+      <h3 className="text-2xl font-semibold mb-5 ">Finish This Ride</h3>
+      <div className="flex items-center justify-between p-3 bg-yellow-300 rounded-xl mt-4">
+        <div className="flex items-center gap-3 ">
+          <img
+            className="h-12 w-12 rounded-full object-cover"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw9GFcYYBlO9bXtNf0FEnaHPuyU8zwtyMgDg&s"
+            alt=""
+          />
+          <h2 className="text-xl font-medium">dubuku</h2>
         </div>
+        <h5 className="tedxt-lg font-semibold">2.2km</h5>
       </div>
       <div className="flex gap-2 flex-col justify-between items-center">
         <div className="w-full mt-5">
@@ -47,9 +50,19 @@ const WaitingForDriver = (props) => {
             </div>
           </div>
         </div>
+
+        <div className="mt-2 w-full">
+          <Link
+            to='/captain-home'
+            className="w-full flex justify-center mt-3 bg-green-600 text-white font-semibold p-3 rounded-lg"
+          >
+            Finish Ride
+          </Link>
+          <p className="text-xs text-center mt-6 ">click on finish ride if you have completed the payment.</p>
+        </div>
       </div>
     </div>
   );
 };
 
-export default WaitingForDriver;
+export default FinishRide;
