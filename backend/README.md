@@ -376,3 +376,156 @@ Authorization: Bearer jwt_token_here
   "message": "Unauthorized"
 }
 ```
+
+# Maps Routes
+
+## Get Coordinates Endpoint
+
+### Endpoint: `/maps/get-cordinates`
+
+### Method: GET
+
+### Description:
+
+This endpoint is used to get the coordinates of a given address. It requires a valid JWT token to be provided in the request headers or cookies.
+
+### Headers:
+
+- `Authorization`: Bearer token (if not using cookies)
+
+### Query Parameters:
+
+- `address`: A string representing the address to get coordinates for.
+
+### Example Request:
+
+```http
+GET /maps/get-cordinates?address=1600+Amphitheatre+Parkway HTTP/1.1
+Host: yourapi.com
+Authorization: Bearer jwt_token_here
+
+
+{
+  "latitude": 37.4224764,
+  "longitude": -122.0842499
+}
+
+{
+  "message": "cordinate not found"
+}
+
+GET /maps/get-distance-time?origin=1600+Amphitheatre+Parkway&destination=1+Infinite+Loop HTTP/1.1
+Host: yourapi.com
+Authorization: Bearer jwt_token_here
+
+{
+  "distance": "14.5 km",
+  "duration": "20 mins"
+}
+
+{
+  "message": "distance and time not found"
+}
+
+GET /maps/get-suggestions?input=1600+Amphitheatre HTTP/1.1
+Host: yourapi.com
+Authorization: Bearer jwt_token_here
+
+
+
+[
+  {
+    "description": "1600 Amphitheatre Parkway, Mountain View, CA, USA",
+    "place_id": "ChIJ2eUgeAK6j4ARbn5u_wAGqWA"
+  },
+  ...
+]
+
+{
+  "message": "suggestions not found"
+}
+
+
+{
+  "pickup": "1600 Amphitheatre Parkway",
+  "destination": "1 Infinite Loop",
+  "vehicleType": "car"
+}
+
+{
+  "_id": "ride_id_here",
+  "userId": "user_id_here",
+  "pickup": "1600 Amphitheatre Parkway",
+  "destination": "1 Infinite Loop",
+  "fare": 100,
+  "otp": "123456",
+  "status": "pending"
+}
+
+
+{
+  "message": "ride not created",
+  "error": "Error message here"
+}
+
+{
+  "message": "ride not created",
+  "error": "Error message here"
+}
+```
+
+# Get Fare Endpoint
+
+## Endpoint: `/rides/get-fare`
+
+### Method: GET
+
+### Description:
+
+This endpoint is used to calculate the fare for a ride based on the pickup and destination locations. It requires a valid JWT token to be provided in the request headers or cookies.
+
+### Headers:
+
+- `Authorization`: Bearer token (if not using cookies)
+
+### Query Parameters:
+
+- `pickup`: A string representing the pickup location.
+- `destination`: A string representing the destination location.
+
+### Example Request:
+
+```http
+GET /rides/get-fare?pickup=1600+Amphitheatre+Parkway&destination=1+Infinite+Loop HTTP/1.1
+Host: yourapi.com
+Authorization: Bearer jwt_token_here
+
+
+{
+  "auto": 100,
+  "car": 150,
+  "motorcycle": 75
+}
+
+
+{
+  "message": "fare not calculated",
+  "error": "Error message here"
+}
+
+
+{
+  "message": "Validation error",
+  "errors": [
+    {
+      "msg": "Invalid pickup",
+      "param": "pickup",
+      "location": "query"
+    },
+    {
+      "msg": "Invalid destination",
+      "param": "destination",
+      "location": "query"
+    }
+  ]
+}

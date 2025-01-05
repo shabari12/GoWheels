@@ -1,16 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const authMiddleware = require("../middleware/auth.middleware");
-const mapController = require("../Controllers/maps.controller");
+const authMiddleware = require("../middlewares/auth.middleware");
+const mapController = require("../controllers/map.controller");
 const { query } = require("express-validator");
 
-module.exports = router;
-
 router.get(
-  "/get-cordinates",
+  "/get-coordinates",
   query("address").isString().isLength({ min: 3 }),
   authMiddleware.authUser,
-  mapController.getCordinates
+  mapController.getCoordinates
 );
 
 router.get(
@@ -27,3 +25,5 @@ router.get(
   authMiddleware.authUser,
   mapController.getAutoCompleteSuggestions
 );
+
+module.exports = router;
