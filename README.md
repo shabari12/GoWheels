@@ -41,5 +41,5 @@ GoWheels is a powerful and scalable **MERN Stack** (MongoDB, Express, React, Nod
 ### Clone the repository
 
 ```bash
-git clone https://github.com/your-username/gowheels.git
+git clone https://github.com/shabari12/GoWheels.git
 cd gowheels
